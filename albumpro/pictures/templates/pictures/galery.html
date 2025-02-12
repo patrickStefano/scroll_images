@@ -26,10 +26,12 @@
             Ctegories
           </div>
           <ul class="list-group list-group-flush" >
-            <li class="list-group-item" style="font-weight: bold;">TOUTS</li>
+            <li class="list-group-item" style="font-weight: bold;">
+              <a href="{% url 'galery' %}">TOUTS</a></li>
  
             {% for categori in categories %}
-            <li class="list-group-item">{{categori.name}}</li>
+            <li class="list-group-item">
+              <a href="{% url 'galery' %}?categori={{categori.name}}">{{categori.name}}</a></li>
             {% endfor %}
 
            
