@@ -4,7 +4,7 @@ from .models import Categories, Photo
 
 
 def venu(request):
-  return HttpResponse("I am Testing my git branch! so i hope it is going to work out!")
+  return render(request, 'pictures/venu.html')
 
 
 #la section des categories ici********************
