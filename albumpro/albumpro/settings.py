@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-# import dj_database_url
-# import os 
+import dj_database_url
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+g&=52jw8mt_z1*ke(mb--c*%r@!avpr6qlf^vb#3gdn6)!68g'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#'django-insecure-+g&=52jw8mt_z1*ke(mb--c*%r@!avpr6qlf^vb#3gdn6)!68g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -82,6 +83,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+ 
+
+database_url = os.environ.get("DATABASE_URL")
+DATABASES = ["default"] = dj_database_url.parse(database_url)
+
+# "postgresql://julievent_site_user:imUdtKhEjwZKlc2zxxnwa9eCiZ7ljj8Z@dpg-cuo8qql2ng1s73e569ng-a.oregon-postgres.render.com/julievent_site"
+
+#postgresql://julievent_site_user:imUdtKhEjwZKlc2zxxnwa9eCiZ7ljj8Z@dpg-cuo8qql2ng1s73e569ng-a.oregon-postgres.render.com/julievent_site
 
 
 # Password validation
